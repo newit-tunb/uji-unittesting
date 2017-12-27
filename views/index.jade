@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  for p in palletes
+      div.color(style="background-color:"+p+";height:100px;width:300px")
+       p=p
+
+
