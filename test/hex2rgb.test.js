@@ -7,15 +7,24 @@ var assert = require("assert")
 describe("hexTOrgb",function () {
 
 
-    it("seharusnya melempar error jika bukan hex code",function(){
-        assert.throws(function () {
-            hex2rgb("biru")
-        }, /hexadesimal tidak valid nih, kalo ga 3 digit ya 6/);
+    it("seharusnya mengembalikan error jika bukan hex code",function(done){
+            hex2rgb("biru", function (error, result) {
+                assert(error)
+                done()
+            })
+
     })
 
-    it("seharusnya mengembalikan converted nilai rgb",function () {
-        var rgb = hex2rgb("fff")
-        assert.deepEqual(rgb, [255,255,255])
+    it("seharusnya mengembalikan converted nilai rgb",function (done) {
+
+        //assert.deepEqual("#fff", [255,255,255])
+
+        hex2rgb("#fff", function (error, result) {
+            assert.strictEqual(error,null)
+            assert.deepEqual(result, [255,255,255])
+            done()
+        })
+
     })
 
 })
