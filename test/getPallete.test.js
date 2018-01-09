@@ -1,23 +1,39 @@
-var getPallete = require("../lib/pallete")
+var getPalette = require("../lib/palette")
 var assert = require("assert")
+var fs = require("fs")
 
-describe("getPallete",function () {
+var configFile = process.cwd()+"/config.json"
+function writeConfe(config,callback) {
+	fs.writeFile(configFile,JSON.stringify(config),callback)
+}
 
 
-    it("seharusnya melempar error jika bukan array",function(){
+describe("describe Palette",function () {
 
-    	function fetch() {
-			return "not array"
-        }
-        assert.throws(function () {
-				getPallete(fetch)
-            }, /bukan array/)
+	var confeg = {}
+	before(function (done) {
+		fs.readFile(configFile,function (err, contents) {
+            confeg = JSON.parse(contents.toString())
+			done()
+        })
     })
 
-	it("seharusnya array dengan 3 item",function(){
-		var pallete = getPallete()
-		assert(Array.isArray(pallete))
-		assert.equal(pallete.length, 3, "tidak menghasilkan 3 items")
+	afterEach(function (done) {
+        writeConfe(confeg,done)
+    })
+
+    it("seharusnya melempar error jika bukan array",function(done){
+
+        writeConfe({palette:"string"},function (err) {
+			assert.throws(getPalette,/is not an array/)
+			done()
+        })
+    })
+
+	it("seharusnya array dengan 3 item secara default",function(){
+		var palette = getPalette()
+		assert(Array.isArray(palette),"tidak mengembalikan array")
+	    assert.equal(palette.length, 3, "tidak menghasilkan 3 items")
 	})
 
 })
