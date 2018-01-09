@@ -7,7 +7,7 @@ var assert = require("assert")
 describe("hexTOrgb",function () {
 
 
-    it("seharusnya mengembalikan error jika bukan hex code",function(done){
+    it.skip("seharusnya mengembalikan error jika bukan hex code",function(done){
             hex2rgb("biru", function (error, result) {
                 assert(error)
                 done()
@@ -27,4 +27,5 @@ describe("hexTOrgb",function () {
 
     })
 
+    it("should be pending if we not put callback on it ...") //should be pending if we not put callback on it
 })
