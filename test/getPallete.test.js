@@ -1,10 +1,10 @@
 var getPalette = require("../lib/palette")
-var assert = require("assert")
+var assert = require("chai").assert
 
 describe("describe Palette",function () {
 
 
-    it.only("seharusnya melempar error jika bukan array",function(done){
+    it("seharusnya melempar error jika bukan array",function(done){
 
     		var notArray = function () {
 				getPalette(process.cwd() + "/test/fixtures/config-palette-non-array.json")
@@ -15,8 +15,8 @@ describe("describe Palette",function () {
 
 	it("seharusnya array dengan 3 item secara default",function(){
 		var palette = getPalette()
-		assert(Array.isArray(palette),"tidak mengembalikan array")
-	    assert.equal(palette.length, 3, "tidak menghasilkan 3 items")
+		assert.isArray(palette,"tidak mengembalikan array")
+	    assert.lengthOf(palette, 3, "tidak menghasilkan 3 items")
 	})
 
 })
